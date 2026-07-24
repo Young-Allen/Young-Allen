@@ -27,57 +27,37 @@ jobs:
         uses: stats-organization/github-readme-stats-action@v2
         with:
           card: stats
-          options: >-
-            username=${{ github.repository_owner }}
-            &show_icons=true
-            &include_all_commits=true
-            &show=prs_merged,reviews
-            &theme=github_dark
-            &hide_border=true
+          options: username=${{ github.repository_owner }}&show_icons=true&include_all_commits=true&show=prs_merged,reviews&theme=github_dark&hide_border=true
           path: profile/stats-dark.svg
           token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
 
       - name: Generate light statistics card
         uses: stats-organization/github-readme-stats-action@v2
         with:
           card: stats
-          options: >-
-            username=${{ github.repository_owner }}
-            &show_icons=true
-            &include_all_commits=true
-            &show=prs_merged,reviews
-            &theme=default
-            &hide_border=true
+          options: username=${{ github.repository_owner }}&show_icons=true&include_all_commits=true&show=prs_merged,reviews&theme=default&hide_border=true
           path: profile/stats-light.svg
           token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
 
       - name: Generate dark language card
         uses: stats-organization/github-readme-stats-action@v2
         with:
           card: top-langs
-          options: >-
-            username=${{ github.repository_owner }}
-            &layout=compact
-            &langs_count=8
-            &exclude_repo=Young-Allen
-            &theme=github_dark
-            &hide_border=true
+          options: username=${{ github.repository_owner }}&layout=compact&langs_count=8&exclude_repo=Young-Allen&theme=github_dark&hide_border=true
           path: profile/languages-dark.svg
           token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
 
       - name: Generate light language card
         uses: stats-organization/github-readme-stats-action@v2
         with:
           card: top-langs
-          options: >-
-            username=${{ github.repository_owner }}
-            &layout=compact
-            &langs_count=8
-            &exclude_repo=Young-Allen
-            &theme=default
-            &hide_border=true
+          options: username=${{ github.repository_owner }}&layout=compact&langs_count=8&exclude_repo=Young-Allen&theme=default&hide_border=true
           path: profile/languages-light.svg
           token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
 
       - name: Generate contribution snake
         uses: Platane/snk/svg-only@v3
