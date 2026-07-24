@@ -2,7 +2,10 @@ name: Refresh profile assets
 
 on:
   schedule:
+    # 每天 UTC 02:17 自动执行
     - cron: "17 2 * * *"
+
+  # 允许在 Actions 页面手动执行
   workflow_dispatch:
 
 permissions:
@@ -23,14 +26,17 @@ jobs:
       - name: Create profile directory
         run: mkdir -p profile
 
+      # ==============================
+      # GitHub statistics
+      # ==============================
+
       - name: Generate dark statistics card
         uses: stats-organization/github-readme-stats-action@v2
         with:
           card: stats
           options: username=${{ github.repository_owner }}&show_icons=true&include_all_commits=true&show=prs_merged,reviews&theme=github_dark&hide_border=true
           path: profile/stats-dark.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fail_on_error: true
+          token: ${{ secrets.PROFILE_STATS_TOKEN }}
 
       - name: Generate light statistics card
         uses: stats-organization/github-readme-stats-action@v2
@@ -38,8 +44,11 @@ jobs:
           card: stats
           options: username=${{ github.repository_owner }}&show_icons=true&include_all_commits=true&show=prs_merged,reviews&theme=default&hide_border=true
           path: profile/stats-light.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fail_on_error: true
+          token: ${{ secrets.PROFILE_STATS_TOKEN }}
+
+      # ==============================
+      # Most used languages
+      # ==============================
 
       - name: Generate dark language card
         uses: stats-organization/github-readme-stats-action@v2
@@ -47,8 +56,7 @@ jobs:
           card: top-langs
           options: username=${{ github.repository_owner }}&layout=compact&langs_count=8&exclude_repo=Young-Allen&theme=github_dark&hide_border=true
           path: profile/languages-dark.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fail_on_error: true
+          token: ${{ secrets.PROFILE_STATS_TOKEN }}
 
       - name: Generate light language card
         uses: stats-organization/github-readme-stats-action@v2
@@ -56,8 +64,11 @@ jobs:
           card: top-langs
           options: username=${{ github.repository_owner }}&layout=compact&langs_count=8&exclude_repo=Young-Allen&theme=default&hide_border=true
           path: profile/languages-light.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fail_on_error: true
+          token: ${{ secrets.PROFILE_STATS_TOKEN }}
+
+      # ==============================
+      # Contribution snake
+      # ==============================
 
       - name: Generate contribution snake
         uses: Platane/snk/svg-only@v3
@@ -67,10 +78,58 @@ jobs:
             profile/github-snake.svg?color_snake=#2f81f7&color_dots=#ebedf0,#9be9a8,#40c463,#30a14e,#216e39
             profile/github-snake-dark.svg?palette=github-dark&color_snake=#58a6ff
 
+      # ==============================
+      # Prevent error SVGs from commit
+      # ==============================
+
+      - name: Validate generated assets
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          required_files=(
+            "profile/stats-dark.svg"
+            "profile/stats-light.svg"
+            "profile/languages-dark.svg"
+            "profile/languages-light.svg"
+            "profile/github-snake.svg"
+            "profile/github-snake-dark.svg"
+          )
+
+          for file in "${required_files[@]}"; do
+            if [ ! -s "$file" ]; then
+              echo "::error file=$file::Generated file is missing or empty."
+              exit 1
+            fi
+          done
+
+          if grep -Eqi \
+            "Something went wrong|Resource not accessible by integration|Incorrect layout input|unsafe characters" \
+            profile/stats-dark.svg \
+            profile/stats-light.svg \
+            profile/languages-dark.svg \
+            profile/languages-light.svg; then
+            echo "::error::One or more GitHub statistics cards contain an error message."
+            exit 1
+          fi
+
+          echo "All profile assets were generated successfully."
+
+      # ==============================
+      # Commit generated SVG files
+      # ==============================
+
       - name: Commit generated assets
+        shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add profile/*.svg
-          git diff --cached --quiet || git commit -m "chore: refresh profile assets"
-          git push
+
+          if git diff --cached --quiet; then
+            echo "No profile asset changes."
+          else
+            git commit -m "chore: refresh profile assets"
+            git push
+          fi
