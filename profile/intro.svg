@@ -1,0 +1,149 @@
+<svg
+  width="900"
+  height="260"
+  viewBox="0 0 900 260"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">Shadow Wang Intro Banner</title>
+  <desc id="desc">
+    Animated GitHub profile banner for Shadow Wang with a typing name effect and research description.
+  </desc>
+
+  <defs>
+    <clipPath id="nameClip">
+      <rect x="110" y="38" width="0" height="48" rx="2">
+        <animate
+          attributeName="width"
+          values="0;0;365;365"
+          keyTimes="0;0.12;0.58;1"
+          dur="6s"
+          repeatCount="indefinite"
+        />
+      </rect>
+    </clipPath>
+
+    <linearGradient id="nameGradient" x1="110" y1="0" x2="500" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#58A6FF" />
+      <stop offset="100%" stop-color="#79C0FF" />
+    </linearGradient>
+
+    <linearGradient id="lineGradient" x1="110" y1="0" x2="760" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#58A6FF" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#58A6FF" stop-opacity="0.15" />
+    </linearGradient>
+  </defs>
+
+  <style>
+    .name {
+      font: 700 38px 'Segoe UI', Ubuntu, Sans-Serif;
+      fill: url(#nameGradient);
+      letter-spacing: 0.2px;
+    }
+
+    .subtitle {
+      font: 600 20px 'Segoe UI', Ubuntu, Sans-Serif;
+      fill: #8B949E;
+      letter-spacing: 0.2px;
+    }
+
+    .desc {
+      font: 500 19px 'Segoe UI', Ubuntu, Sans-Serif;
+      fill: #C9D1D9;
+    }
+
+    .keyword {
+      fill: #79C0FF;
+      font-weight: 700;
+    }
+
+    .cursor {
+      fill: #58A6FF;
+    }
+
+    .fade-soft {
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    .float-soft {
+      animation: floatSoft 4s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .glow-soft {
+      animation: glowSoft 3s ease-in-out infinite;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatSoft {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-2px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes glowSoft {
+      0% { opacity: 0.75; }
+      50% { opacity: 1; }
+      100% { opacity: 0.75; }
+    }
+  </style>
+
+  <!-- top accent line -->
+  <rect x="110" y="26" width="680" height="2.2" rx="1.1" fill="url(#lineGradient)">
+    <animate attributeName="opacity" values="0.35;1;0.35" dur="4s" repeatCount="indefinite" />
+  </rect>
+
+  <!-- typed name -->
+  <g clip-path="url(#nameClip)">
+    <text x="110" y="76" class="name">Hi, I'm Shadow Wang</text>
+  </g>
+
+  <!-- cursor -->
+  <rect x="110" y="42" width="3" height="40" rx="1.5" class="cursor">
+    <animate
+      attributeName="x"
+      values="110;110;472;472"
+      keyTimes="0;0.12;0.58;1"
+      dur="6s"
+      repeatCount="indefinite"
+    />
+    <animate
+      attributeName="opacity"
+      values="1;1;0;1;0;1"
+      dur="1s"
+      repeatCount="indefinite"
+    />
+  </rect>
+
+  <!-- subtitle -->
+  <g class="fade-soft float-soft" style="animation-delay: 0.6s;">
+    <text x="110" y="126" class="subtitle">
+      Human–AI Interaction · AI Agents · Visual Computing
+      <animate attributeName="opacity" values="0.72;1;0.72" dur="4s" repeatCount="indefinite" />
+    </text>
+  </g>
+
+  <!-- description line 1 -->
+  <g class="fade-soft" style="animation-delay: 1.0s;">
+    <text x="110" y="176" class="desc">Building intelligent systems that connect</text>
+  </g>
+
+  <!-- description line 2 -->
+  <g class="fade-soft glow-soft" style="animation-delay: 1.4s;">
+    <text x="110" y="210" class="desc">
+      <tspan class="keyword">human creativity</tspan>
+      <tspan>, </tspan>
+      <tspan class="keyword">AI agents</tspan>
+      <tspan>, and </tspan>
+      <tspan class="keyword">interactive visualization</tspan>
+      <tspan>.</tspan>
+    </text>
+  </g>
+</svg>
