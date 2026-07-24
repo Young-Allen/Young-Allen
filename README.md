@@ -1,6 +1,10 @@
 <div align="center">
 
-<img src="./profile/intro.svg" alt="Shadow Wang Intro" width="100%" />
+<img
+  src="./profile/intro-centered-v2.svg"
+  alt="Shadow Wang Intro"
+  width="100%"
+/>
 
 <br />
 
