@@ -1,11 +1,8 @@
 <div align="center">
 
-# Young-Allen
+<img src="./profile/intro.svg" alt="Shadow Wang Intro" width="100%" />
 
-### Human–AI Interaction · AI Agents · Visual Computing
-
-Building intelligent systems that connect  
-**human creativity, AI agents, and interactive visualization.**
+<br />
 
 [![GitHub](https://img.shields.io/badge/GitHub-Young--Allen-181717?style=flat&logo=github)](https://github.com/Young-Allen)
 [![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org/)
