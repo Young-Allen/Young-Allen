@@ -4,6 +4,7 @@
   viewBox="0 0 900 250"
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
+  preserveAspectRatio="xMidYMid meet"
   role="img"
   aria-labelledby="title desc"
 >
@@ -15,18 +16,18 @@
   </desc>
 
   <defs>
-    <!-- Name typing clip -->
+    <!-- 姓名打字机裁剪区域 -->
     <clipPath id="nameClip">
       <rect
-        x="36"
+        x="255"
         y="25"
         width="0"
-        height="55"
+        height="56"
         rx="2"
       >
         <animate
           attributeName="width"
-          values="0;0;470;470"
+          values="0;0;390;390"
           keyTimes="0;0.08;0.34;1"
           dur="10s"
           repeatCount="indefinite"
@@ -34,43 +35,68 @@
       </rect>
     </clipPath>
 
-    <!-- Name gradient -->
+    <!-- 姓名渐变 -->
     <linearGradient
       id="nameGradient"
-      x1="36"
+      x1="255"
       y1="0"
-      x2="500"
+      x2="645"
       y2="0"
       gradientUnits="userSpaceOnUse"
     >
       <stop
         offset="0%"
-        stop-color="#6CB6FF"
+        stop-color="#6EA8FE"
       />
+
+      <stop
+        offset="52%"
+        stop-color="#86A8F7"
+      />
+
       <stop
         offset="100%"
-        stop-color="#9CCBFF"
+        stop-color="#A78BFA"
       />
     </linearGradient>
 
-    <!-- Top accent line -->
+    <!-- 居中的顶部装饰线 -->
     <linearGradient
       id="lineGradient"
-      x1="36"
+      x1="150"
       y1="0"
-      x2="864"
+      x2="750"
       y2="0"
       gradientUnits="userSpaceOnUse"
     >
       <stop
         offset="0%"
-        stop-color="#6CB6FF"
-        stop-opacity="0.90"
+        stop-color="#E28B82"
+        stop-opacity="0.12"
       />
+
+      <stop
+        offset="28%"
+        stop-color="#E28B82"
+        stop-opacity="0.65"
+      />
+
+      <stop
+        offset="50%"
+        stop-color="#D7B05F"
+        stop-opacity="0.72"
+      />
+
+      <stop
+        offset="72%"
+        stop-color="#65B8B4"
+        stop-opacity="0.65"
+      />
+
       <stop
         offset="100%"
-        stop-color="#6CB6FF"
-        stop-opacity="0.08"
+        stop-color="#65B8B4"
+        stop-opacity="0.12"
       />
     </linearGradient>
   </defs>
@@ -84,20 +110,23 @@
 
     .subtitle {
       font: 600 20px 'Segoe UI', Ubuntu, Arial, Sans-Serif;
-      letter-spacing: 0.15px;
+      letter-spacing: 0.2px;
     }
 
-    /* refined harmonious palette */
+    /*
+      三个方向采用统一明度、较低饱和度的配色：
+      珊瑚色 / 琥珀色 / 青绿色
+    */
     .hci {
-      fill: #F28B82;
+      fill: #E28B82;
     }
 
     .agent {
-      fill: #E6B450;
+      fill: #D7B05F;
     }
 
     .visual {
-      fill: #7CC7FF;
+      fill: #65B8B4;
     }
 
     .separator {
@@ -108,49 +137,82 @@
     .description {
       font: 500 20px 'Segoe UI', Ubuntu, Arial, Sans-Serif;
       fill: #C9D1D9;
+      letter-spacing: 0.05px;
     }
 
     .keyword {
-      fill: #8EC5FF;
+      fill: #8EACF4;
       font-weight: 700;
     }
 
     .cursor {
-      fill: #6CB6FF;
+      fill: #8EA8F8;
+    }
+
+    /*
+      GitHub 浅色模式下提高文字对比度
+    */
+    @media (prefers-color-scheme: light) {
+      .hci {
+        fill: #B95F59;
+      }
+
+      .agent {
+        fill: #98701E;
+      }
+
+      .visual {
+        fill: #327F7C;
+      }
+
+      .separator {
+        fill: #707781;
+      }
+
+      .description {
+        fill: #4B5563;
+      }
+
+      .keyword {
+        fill: #526FBE;
+      }
     }
   </style>
 
-  <!-- Top line -->
+  <!-- 顶部居中装饰线 -->
   <rect
-    x="36"
+    x="150"
     y="18"
-    width="828"
+    width="600"
     height="2"
     rx="1"
     fill="url(#lineGradient)"
   >
     <animate
       attributeName="opacity"
-      values="0.40;0.95;0.40"
-      dur="5s"
+      values="0.55;1;0.55"
+      dur="6s"
       repeatCount="indefinite"
     />
   </rect>
 
-  <!-- Line 1: typed name -->
+  <!-- 第一行：居中的姓名打字效果 -->
   <g clip-path="url(#nameClip)">
     <text
-      x="36"
+      x="450"
       y="69"
+      text-anchor="middle"
+      textLength="390"
+      lengthAdjust="spacingAndGlyphs"
       class="name"
     >
       Hi, I'm Shadow Wang
     </text>
   </g>
 
-  <!-- Cursor -->
+  <!-- 打字光标 -->
   <rect
-    x="36"
+    x="255"
     y="31"
     width="3"
     height="42"
@@ -159,11 +221,12 @@
   >
     <animate
       attributeName="x"
-      values="36;36;470;470"
+      values="255;255;645;645"
       keyTimes="0;0.08;0.34;1"
       dur="10s"
       repeatCount="indefinite"
     />
+
     <animate
       attributeName="opacity"
       values="1;0;1;0;1"
@@ -172,43 +235,31 @@
     />
   </rect>
 
-  <!-- Line 2: research directions -->
+  <!-- 第二行：研究方向，只有淡入，不再浮动 -->
   <g opacity="0">
     <text
-      x="36"
-      y="111"
+      x="450"
+      y="115"
+      text-anchor="middle"
       class="subtitle"
-    >
-      <tspan class="hci">Human–AI Interaction</tspan>
-      <tspan class="separator"> · </tspan>
-      <tspan class="agent">AI Agents</tspan>
-      <tspan class="separator"> · </tspan>
-      <tspan class="visual">Visual Computing</tspan>
-    </text>
+      xml:space="preserve"
+    ><tspan class="hci">Human–AI Interaction</tspan><tspan class="separator">  ·  </tspan><tspan class="agent">AI Agents</tspan><tspan class="separator">  ·  </tspan><tspan class="visual">Visual Computing</tspan></text>
 
     <animate
       attributeName="opacity"
       values="0;0;1;1"
-      keyTimes="0;0.11;0.19;1"
+      keyTimes="0;0.11;0.20;1"
       dur="10s"
       repeatCount="indefinite"
     />
-
-    <animateTransform
-      attributeName="transform"
-      type="translate"
-      values="0 0;0 -1;0 0"
-      dur="5s"
-      repeatCount="indefinite"
-      additive="sum"
-    />
   </g>
 
-  <!-- Line 3 -->
+  <!-- 第三行 -->
   <g opacity="0">
     <text
-      x="36"
-      y="164"
+      x="450"
+      y="169"
+      text-anchor="middle"
       class="description"
     >
       I explore how humans and intelligent systems
@@ -216,33 +267,27 @@
 
     <animate
       attributeName="opacity"
-      values="0;0;0;1;1"
-      keyTimes="0;0.17;0.22;0.29;1"
+      values="0;0;1;1"
+      keyTimes="0;0.20;0.30;1"
       dur="10s"
       repeatCount="indefinite"
     />
   </g>
 
-  <!-- Line 4 -->
+  <!-- 第四行 -->
   <g opacity="0">
     <text
-      x="36"
-      y="199"
+      x="450"
+      y="204"
+      text-anchor="middle"
       class="description"
-    >
-      <tspan>can </tspan>
-      <tspan class="keyword">create</tspan>
-      <tspan>, </tspan>
-      <tspan class="keyword">communicate</tspan>
-      <tspan> and </tspan>
-      <tspan class="keyword">evolve</tspan>
-      <tspan> together.</tspan>
-    </text>
+      xml:space="preserve"
+    ><tspan>can </tspan><tspan class="keyword">create</tspan><tspan>, </tspan><tspan class="keyword">communicate</tspan><tspan> and </tspan><tspan class="keyword">evolve</tspan><tspan> together.</tspan></text>
 
     <animate
       attributeName="opacity"
-      values="0;0;0;0;1;1"
-      keyTimes="0;0.23;0.28;0.33;0.39;1"
+      values="0;0;1;1"
+      keyTimes="0;0.29;0.40;1"
       dur="10s"
       repeatCount="indefinite"
     />
