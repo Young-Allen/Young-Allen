@@ -9,8 +9,7 @@
 <br />
 
 [![GitHub](https://img.shields.io/badge/GitHub-Young--Allen-181717?style=flat&logo=github)](https://github.com/Young-Allen)
-[![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org/)
-[![Vue](https://img.shields.io/badge/Vue.js-4FC08D?style=flat&logo=vuedotjs&logoColor=white)](https://vuejs.org/)
+![](https://komarev.com/ghpvc/?username=Young-Allen&color=blue&style=flat-square)
 
 </div>
 
