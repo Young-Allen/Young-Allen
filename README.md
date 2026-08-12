@@ -18,10 +18,8 @@
 ## About me
 
 - 🎓 Master's student working on Human–Computer Interaction
-- 🤖 Exploring AI Agents, reusable skills and RAG systems
-- 📊 Building data-accurate pictorial chart and infographic systems
+- 🤖 Exploring Recursive Self-Improvement Agents, Self-Evolving Skills and Next-Generation RAG Systems
 - 🧠 Interested in defining new forms of Human–AI interaction
-- 🛠️ Working across Python, TypeScript, Vue, Java and Android
 
 > Technology is not only a tool to build products,  
 > but also a medium for redefining how humans interact with intelligence.
